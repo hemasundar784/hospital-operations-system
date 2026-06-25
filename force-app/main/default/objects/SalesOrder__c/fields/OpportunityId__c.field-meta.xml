@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>OpportunityId__c</fullName>
+    <deleteConstraint>Restrict</deleteConstraint>
+    <description>Links each Sales Order to its corresponding Opportunity for better sales tracking and reporting.</description>
+    <label>Opportunity (Deals)</label>
+    <referenceTo>Opportunity</referenceTo>
+    <relationshipLabel>Sales Orders</relationshipLabel>
+    <relationshipName>SalesOrders</relationshipName>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

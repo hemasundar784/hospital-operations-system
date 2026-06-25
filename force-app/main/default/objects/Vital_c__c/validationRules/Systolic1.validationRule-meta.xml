@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Systolic1</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(Pulse_Rate__c &lt; 20, Pulse_Rate__c &gt; 250)</errorConditionFormula>
+    <errorDisplayField>Pulse_Rate__c</errorDisplayField>
+    <errorMessage>&quot;Pulse values must fall
+within standard physical
+ranges.&quot;</errorMessage>
+</ValidationRule>

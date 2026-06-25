@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>isDeliverable__c</fullName>
+    <defaultValue>false</defaultValue>
+    <description>Indicates whether delivery is possible to the requested location.</description>
+    <label>Deliverable</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

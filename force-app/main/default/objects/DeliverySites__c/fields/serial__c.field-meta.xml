@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>serial__c</fullName>
+    <description>Displays the auto-generated serial number for each location.</description>
+    <displayFormat>LNO-{00000000}</displayFormat>
+    <externalId>false</externalId>
+    <label>Serial Number</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>AutoNumber</type>
+</CustomField>

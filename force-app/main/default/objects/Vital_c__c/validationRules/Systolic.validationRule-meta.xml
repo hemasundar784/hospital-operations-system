@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Systolic</fullName>
+    <active>true</active>
+    <errorConditionFormula>Systolic_BP__c &lt; Diastolic_BP__c</errorConditionFormula>
+    <errorDisplayField>Systolic_BP__c</errorDisplayField>
+    <errorMessage>&quot;Systolic pressure must
+be greater than diastolic
+pressure.&quot;</errorMessage>
+</ValidationRule>

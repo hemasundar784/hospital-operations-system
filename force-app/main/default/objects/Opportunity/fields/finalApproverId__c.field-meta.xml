@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>finalApproverId__c</fullName>
+    <deleteConstraint>SetNull</deleteConstraint>
+    <description>Identifies the Level 2 Approver responsible for second-level approval of high-value Opportunities.</description>
+    <label>Final Approver</label>
+    <referenceTo>User</referenceTo>
+    <relationshipName>FinalOrders</relationshipName>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <trackTrending>false</trackTrending>
+    <type>Lookup</type>
+</CustomField>

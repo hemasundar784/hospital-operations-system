@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Subjects__c</fullName>
+    <label>Subjects</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>ECE - 1</fullName>
+                <default>false</default>
+                <label>ECE - 1</label>
+            </value>
+            <value>
+                <fullName>ECE - 2</fullName>
+                <default>false</default>
+                <label>ECE - 2</label>
+            </value>
+            <value>
+                <fullName>ECE - 3</fullName>
+                <default>false</default>
+                <label>ECE - 3</label>
+            </value>
+            <value>
+                <fullName>ECE - 4</fullName>
+                <default>false</default>
+                <label>ECE - 4</label>
+            </value>
+            <value>
+                <fullName>EEE - 1</fullName>
+                <default>false</default>
+                <label>EEE - 1</label>
+            </value>
+            <value>
+                <fullName>EEE - 2</fullName>
+                <default>false</default>
+                <label>EEE - 2</label>
+            </value>
+            <value>
+                <fullName>CSE - 1</fullName>
+                <default>false</default>
+                <label>CSE - 1</label>
+            </value>
+            <value>
+                <fullName>CSE - 2</fullName>
+                <default>false</default>
+                <label>CSE - 2</label>
+            </value>
+            <value>
+                <fullName>CSE - 3</fullName>
+                <default>false</default>
+                <label>CSE - 3</label>
+            </value>
+            <value>
+                <fullName>CSE - 4</fullName>
+                <default>false</default>
+                <label>CSE - 4</label>
+            </value>
+            <value>
+                <fullName>IT - 1</fullName>
+                <default>false</default>
+                <label>IT - 1</label>
+            </value>
+            <value>
+                <fullName>IT - 2</fullName>
+                <default>false</default>
+                <label>IT - 2</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>4</visibleLines>
+</CustomField>

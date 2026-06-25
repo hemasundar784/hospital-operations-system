@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>totalTransactions__c</fullName>
+    <description>This will show the total transactions available per this Account</description>
+    <label>Total Transactions</label>
+    <summaryForeignKey>Transactions__c.accountId__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <type>Summary</type>
+</CustomField>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>uniqueId__c</fullName>
+    <caseSensitive>false</caseSensitive>
+    <description>Displays the external system’s unique identifier for the contact</description>
+    <externalId>true</externalId>
+    <label>Unique Id</label>
+    <length>25</length>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>Text</type>
+    <unique>true</unique>
+</CustomField>
