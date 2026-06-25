@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>SSN_modify</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(
+    ISCHANGED(SSN_Identification__c), 
+    NOT($Profile.Name = &quot;System Administrator&quot;)
+)</errorConditionFormula>
+    <errorDisplayField>SSN_Identification__c</errorDisplayField>
+    <errorMessage>&quot;SSN must follow
+standard formatting:
+XXX-XX-XXXX.&quot;</errorMessage>
+</ValidationRule>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>CoPayPercentage</fullName>
+    <active>true</active>
+    <errorConditionFormula>OR(Co_Pay_Percentage__c &lt; 0,
+Co_Pay_Percentage__c &gt; 1)</errorConditionFormula>
+    <errorDisplayField>Co_Pay_Percentage__c</errorDisplayField>
+    <errorMessage>&quot;Co-Pay percentage
+values must be between
+0 and 100%.&quot;</errorMessage>
+</ValidationRule>

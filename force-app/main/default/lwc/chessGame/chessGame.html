@@ -1,0 +1,79 @@
+<template>
+    <!-- SPLASH SCREEN START MENU -->
+    <template if:false={isGameStarted}>
+        <div class="splash-container">
+            <div class="splash-card">
+                <h1 class="arcade-title">🐾 Cat Tactical Chess 🐾</h1>
+                <p class="splash-subtitle">An Enterprise Retro Arcade Match Engine</p>
+                <div class="splash-actions">
+                    <button class="action-btn start-btn" onclick={handleStartGame}>Launch Match Engine</button>
+                    <button class="action-btn exit-btn" onclick={navigateToHome}>Exit to Dashboard</button>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- ACTIVE GAME INTERFACE -->
+    <template if:true={isGameStarted}>
+        <!-- FULLSCREEN FX OVERLAY LAYER -->
+        <div id="fx-overlay" class={computedFxOverlayClass}>
+            <div id="scratch-marks" class={computedScratchClass}>
+                <div class="scratch scratch-1"></div>
+                <div class="scratch scratch-2"></div>
+                <div class="scratch scratch-3"></div>
+            </div>
+            <div id="kill-text" class={computedKillTextClass}>{strikeText}</div>
+        </div>
+
+        <div class={computedGameContainerClass}>
+            <div class="game-header">
+                <h1>🐾 Cat Tactical Chess 🐾</h1>
+                <div class="status-bar">
+                    <h2>Turn: <span class="turn-highlight">{currentTurnDisplay}</span></h2>
+                    <button class="exit-inline-btn" onclick={navigateToHome}>Exit</button>
+                </div>
+            </div>
+
+            <!-- CHESSBOARD GRID -->
+            <div id="chessboard" class="board-grid">
+                <template for:each={boardRows} for:item="row">
+                    <template for:each={row.cells} for:item="cell">
+                        <div key={cell.id}
+                             class={cell.className}
+                             data-row={cell.row}
+                             data-col={cell.col}
+                             onclick={handleSquareClick}>
+                            
+                            <!-- Piece Render -->
+                            <template if:true={cell.hasPiece}>
+                                <span class={cell.pieceClassName} style={cell.pieceStyle}>
+                                    {cell.pieceIcon}
+                                </span>
+                                <span class="tooltip">{cell.pieceName}</span>
+                            </template>
+
+                            <!-- Highlight Marker for Valid Moves -->
+                            <template if:true={cell.isHighlighted}>
+                                <div class="highlight-marker"></div>
+                            </template>
+                        </div>
+                    </template>
+                </template>
+            </div>
+        </div>
+    </template>
+
+    <!-- RETRY / GAME OVER MODAL OVERLAY -->
+    <template if:true={isGameOver}>
+        <div class="modal-overlay">
+            <div class="modal-card">
+                <h2 class="modal-title">⚔️ MATCH RESOLUTION ⚔️</h2>
+                <p class="modal-message">{gameOverMessage}</p>
+                <div class="modal-actions">
+                    <button class="action-btn retry-btn" onclick={handleRetry}>Play Again</button>
+                    <button class="action-btn exit-btn" onclick={navigateToHome}>Return Home</button>
+                </div>
+            </div>
+        </div>
+    </template>
+</template>

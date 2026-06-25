@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>appointment_schedule</fullName>
+    <active>true</active>
+    <errorConditionFormula>Start_Time__c &lt; NOW()</errorConditionFormula>
+    <errorDisplayField>Start_Time__c</errorDisplayField>
+    <errorMessage>&quot;Appointment scheduling
+times must be set in the
+future.&quot;</errorMessage>
+</ValidationRule>

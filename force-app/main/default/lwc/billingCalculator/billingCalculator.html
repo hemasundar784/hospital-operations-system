@@ -1,0 +1,114 @@
+<template>
+    <lightning-card title={label.BILLING_TITLE} icon-name="standard:billing" class="invoice-card">
+        <div class="invoice-container slds-p-around_large">
+            
+            <template if:false={recordId}>
+                <div class="slds-form-element slds-m-bottom_large no-print">
+                    <lightning-input 
+                        type="search" 
+                        label="Search Invoice / Billing Record" 
+                        value={searchKey} 
+                        onchange={handleSearchChange} 
+                        placeholder="Type Billing Name...">
+                    </lightning-input>
+                    
+                    <template if:true={searchResults.length}>
+                        <div class="slds-dropdown slds-dropdown_fluid" style="position:relative; display:block; z-index:9999;">
+                            <ul class="slds-dropdown__list" role="menu">
+                                <template for:each={searchResults} for:item="rec">
+                                    <li key={rec.Id} class="slds-dropdown__item" role="presentation">
+                                        <a href="#" data-id={rec.Id} onclick={handleSelectRecord} role="menuitem">
+                                            <span class="slds-truncate">{rec.Name}</span>
+                                        </a>
+                                    </li>
+                                </template>
+                            </ul>
+                        </div>
+                    </template>
+                </div>
+            </template>
+
+            <template if:true={targetId}>
+                <div class="invoice-paper">
+                    <div class="invoice-header slds-grid slds-grid_align-spread slds-m-bottom_large">
+                        <div>
+                            <h1 class="invoice-logo">MEDICAL CENTER</h1>
+                            <p class="slds-text-color_weak">123 Healthcare Blvd, Medical District</p>
+                        </div>
+                        <div class="slds-text-align_right">
+                            <h2 class="invoice-title">INVOICE</h2>
+                            <p class="invoice-id-text"><strong>Patient Name:</strong> {recordName}</p>
+                        </div>
+                    </div>
+
+                    <hr class="invoice-divider"/>
+
+                    <lightning-record-form
+                        record-id={targetId}
+                        object-api-name="Billing_c__c"
+                        fields={fieldsToDisplay}
+                        columns="2"
+                        mode="view"
+                        density="compact"
+                        onsuccess={handleFormSuccess}>
+                    </lightning-record-form>
+
+                    <hr class="invoice-divider slds-m-top_medium"/>
+
+                   <div class="slds-grid slds-m-top_medium">
+    <div class="invoice-summary-box slds-col slds-size_1-of-1">
+        
+            <div class="slds-grid slds-grid_align-spread slds-p-vertical_xx-small">
+                <span class="slds-text-color_weak">Total Invoice Amount:</span>
+                <strong><lightning-formatted-number value={totalInvoiceAmount} format-style="currency"></lightning-formatted-number></strong>
+            </div>
+
+            <div class="slds-grid slds-p-vertical_xx-small slds-grid_vertical-align-center">
+                <span class="slds-text-color_weak slds-m-right_small" style="min-width: 180px;">Insurance Covered Amount:</span>
+                <span class="insurance-edit-wrapper">
+                    <lightning-input 
+                        type="number" 
+                        variant="label-hidden" 
+                        value={insuranceAmount} 
+                        onchange={handleInsuranceChange} 
+                        formatter="currency" 
+                        step="0.01" 
+                        class="insurance-inline-input">
+                    </lightning-input>
+                </span>
+            </div>
+
+            <hr class="summary-divider"/>
+
+            <div class="slds-grid slds-grid_align-spread invoice-total-row slds-p-vertical_small">
+                <span class="total-payable-label">Net Payable by Patient:</span>
+                <span class="total-payable-value">
+                    <lightning-formatted-number value={payable} format-style="currency"></lightning-formatted-number>
+                </span>
+            </div>
+            
+            <div class="slds-text-align_left slds-m-top_medium no-print">
+                <br>
+                <lightning-button variant="brand" label="Update Insurance & Save" onclick={handleSave}></lightning-button>
+                <lightning-button variant="neutral" label="Print Invoice" onclick={handlePrint} class="slds-m-left_x-small  slds-text-align_right"></lightning-button>
+            </div>
+
+        </div>
+    </div>
+                </div>
+            </template>
+
+            <template if:true={isLoading}>
+                <div class="slds-align_absolute-center slds-m-around_medium">
+                    <lightning-spinner alternative-text="Loading Invoice Layout..." size="medium"></lightning-spinner>
+                </div>
+            </template>
+            <template if:true={showPromptMessage}>
+                <div class="invoice-placeholder-box slds-text-align_center slds-p-around_large">
+                    <lightning-icon icon-name="standard:service_contract" size="large" class="slds-m-bottom_small"></lightning-icon>
+                    <p class="slds-text-heading_small slds-text-color_weak">Please search and select a billing statement to view invoice summary layout.</p>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+</template>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>TreatmentHighCost</fullName>
+    <active>true</active>
+    <description>End_Date__c &lt; Start_Date__c</description>
+    <errorConditionFormula>AND(Total_Estimated_Cost__c &gt; 50000,
+NOT(Is_Approved__c))</errorConditionFormula>
+    <errorDisplayField>Is_Approved__c</errorDisplayField>
+    <errorMessage>&quot;High-cost treatments
+require formal director
+approval.&quot;</errorMessage>
+</ValidationRule>

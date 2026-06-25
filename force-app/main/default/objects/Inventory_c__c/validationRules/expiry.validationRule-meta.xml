@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>expiry</fullName>
+    <active>true</active>
+    <errorConditionFormula>Expiration_Date__c &lt; TODAY()</errorConditionFormula>
+    <errorMessage>&quot;Expired inventory items
+cannot be added to
+stock.&quot;</errorMessage>
+</ValidationRule>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>appointment_doctor</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND(ISCHANGED(Doctor_c__c),
+ISPICKVAL(Status__c, &quot;In Progress&quot;))</errorConditionFormula>
+    <errorDisplayField>Doctor_c__c</errorDisplayField>
+    <errorMessage>&quot;The assigned provider
+cannot be changed mid
+visit.&quot;</errorMessage>
+</ValidationRule>

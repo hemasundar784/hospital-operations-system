@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Date_of_birth</fullName>
+    <active>true</active>
+    <description>&quot;Date of Birth cannot be
+set in the future.</description>
+    <errorConditionFormula>Date_Of_Birth__c &gt; TODAY()</errorConditionFormula>
+    <errorDisplayField>Date_Of_Birth__c</errorDisplayField>
+    <errorMessage>&quot;Date of Birth cannot be
+set in the future.&quot;</errorMessage>
+</ValidationRule>
