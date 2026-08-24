@@ -10,8 +10,10 @@ public without sharing class BillingCalculatorController {
                 WHERE Id = :ID
                 LIMIT 1
             ];
+            
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
+            //System.debug('just checking');
         }
     }
 
