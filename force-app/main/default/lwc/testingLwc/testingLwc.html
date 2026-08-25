@@ -1,0 +1,68 @@
+<template>
+    <lightning-card title="Testing LWC Lifecycle" icon-name="custom:custom14">
+        <div class="slds-m-around_medium">
+            <!-- First Input -->
+            <lightning-input 
+                type="text" 
+                label="First Name Input" 
+                onchange={handleChange}>
+            </lightning-input>
+            <p>Live values from first input: {enteredName}</p>
+
+            <!-- Second Input (Using onchange to capture entry safely) -->
+            <lightning-input 
+                type="text" 
+                label="Second Name Input" 
+                oncommit={handleSecondInputChange} 
+                class="slds-m-top_small">
+            </lightning-input>
+            <p>Live values from second input: {enter2Name}</p>
+
+            <!-- The Action Button -->
+            <div class="slds-m-top_medium">
+                <lightning-button label="Show Data" onclick={handleClick}></lightning-button>
+            </div>
+
+            <!-- Conditional Block -->
+        <template lwc:if={isClicked}>
+        <div class="slds-box slds-m-top_medium slds-theme_shade">
+            <p><strong>Status:</strong> {data}</p>
+        </div>
+            <!-- This section only turns on after click AND after data is successfully retrieved -->
+            <template lwc:if={showRecordGrid}>
+                <div class="slds-var-m-around_large">
+                    <div class="slds-grid slds-wrap slds-gutters slds-var-m-top_small">
+
+                        <div class="slds-col slds-size_1-of-2">
+                            <p class="slds-text-heading_small">Id</p>
+                            <p class="slds-text-heading_medium"><b>{retrievedRecord.bankAccountId}</b></p>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-2">
+                            <p class="slds-text-heading_small">Account Number</p>
+                            <p class="slds-text-heading_medium"><b>{retrievedRecord.accountNumber}</b></p>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-2">
+                            <p class="slds-text-heading_small">Max Amount</p>
+                            <p class="slds-text-heading_medium"><b>{retrievedRecord.maxAmount}</b></p>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-2">
+                            <p class="slds-text-heading_small">Min Amount</p>
+                            <p class="slds-text-heading_medium"><b>{retrievedRecord.minAmount}</b></p>
+                        </div>
+
+                        <div class="slds-col slds-size_1-of-2">
+                            <p class="slds-text-heading_small">Total Deposits</p>
+                            <p class="slds-text-heading_medium"><b>{retrievedRecord.totalDeposits}</b></p>
+                        </div>
+
+                    </div>
+                </div>
+            </template>
+        
+    </template>
+</div>
+    </lightning-card>
+</template>
