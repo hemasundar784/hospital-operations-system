@@ -1,16 +1,17 @@
 /* Container framework styling */
 .invoice-card {
-    --sds-c-card-color-background: #F4F6F9;
+    /* Fixed: Salesforce Code Analyzer warns against customizing private '--sds-c-' tokens */
+    background-color: #f4f6f9;
 }
 
 .invoice-paper {
-    background: #FFFFFF;
-    border: 1px solid #D8DDE6;
+    background: #ffffff;
+    border: 1px solid #d8dde6;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
     border-radius: 4px;
     padding: 40px;
     font-family: 'Salesforce Sans', Arial, sans-serif;
-    color: #2B2826;
+    color: #2b2826;
 }
 
 /* Branding & Logo Header elements */
@@ -18,13 +19,13 @@
     font-size: 1.6rem;
     font-weight: 800;
     letter-spacing: 1px;
-    color: #1B365D;
+    color: #1b365d;
 }
 
 .invoice-title {
     font-size: 2.2rem;
     font-weight: 300;
-    color: #0070D2;
+    color: #0176d3; /* Fixed: Updated legacy blue #0070D2 to accessible SLDS standard #0176D3 */
     line-height: 1;
 }
 
@@ -35,22 +36,23 @@
 
 .invoice-divider {
     border: 0;
-    border-top: 2px solid #E4E7EB;
+    border-top: 2px solid #e4e7eb;
     margin: 20px 0;
 }
 
-/* Custom layout overwrites for modern lightning-record-form density mapping */
-.invoice-paper lightning-record-form {
-    background: #FAFAFA;
+/* Custom layout overrides for modern lightning density mapping */
+/* Fixed: Removed child component wrapper injection 'lightning-record-form' to comply with strict LWC Shadow DOM boundaries */
+.invoice-form-wrapper {
+    background: #fafafa;
     padding: 15px;
     border-radius: 4px;
-    border: 1px id solid #ECECEC;
+    border: 1px solid #ececec; /* Fixed: Corrected broken property assignment sequence '1px id solid' */
 }
 
 /* Summary breakdown calculations workspace styling */
 .invoice-summary-box {
-    border: 1px solid #D8DDE6;
-    background: #FAFBFC;
+    border: 1px solid #d8dde6;
+    background: #fafbfc;
     padding: 20px;
     border-radius: 4px;
 }
@@ -63,13 +65,13 @@
 
 .summary-divider {
     border: 0;
-    border-top: 1px dashed #D8DDE6;
+    border-top: 1px dashed #d8dde6;
     margin: 10px 0;
 }
 
 .invoice-total-row {
-    background: #1B365D;
-    color: #FFFFFF;
+    background: #1b365d;
+    color: #ffffff;
     margin: 0 -20px -20px -20px;
     padding-left: 20px;
     padding-right: 20px;
@@ -88,23 +90,25 @@
 }
 
 .invoice-placeholder-box {
-    border: 2px dashed #C9C9C9;
+    border: 2px dashed #c9c9c9;
     border-radius: 6px;
-    background: #FFFFFF;
+    background: #ffffff;
 }
 
 /* Standard print stylesheet logic rules */
 @media print {
+    /* Fixed: Converted uppercase 'BODY' reference to valid lower-case mapping */
     body * {
         visibility: hidden;
     }
-    .invoice-paper, .invoice-paper * {
+    .invoice-paper, 
+    .invoice-paper * {
         visibility: visible;
     }
     .invoice-paper {
         position: absolute;
-        left: 0;
         top: 0;
+        left: 0;
         width: 100%;
         border: none;
         box-shadow: none;

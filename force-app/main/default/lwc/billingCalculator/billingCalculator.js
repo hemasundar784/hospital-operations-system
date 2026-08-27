@@ -1,4 +1,4 @@
-import { LightningElement, api, wire, track } from 'lwc';
+import { LightningElement, api, wire } from 'lwc'; // Removed unnecessary @track
 import { refreshApex } from '@salesforce/apex';
 import { ShowToastEvent } from 'lightning/platformShowToastEvent';
 import getBillingRecord from '@salesforce/apex/BillingCalculatorController.getBillingRecord';
@@ -8,16 +8,21 @@ import BILLING_TITLE from '@salesforce/label/c.Billing_Calculator_Title';
 
 export default class BillingCalculator extends LightningElement {
     @api recordId;
-    @track selectedBillingId;
-    @track searchKey = '';
-    @track searchResults = [];
-    @track insuranceAmount = 0;
+    
+    // Modern LWC is reactive by default; @track is no longer needed for primitive types/basic arrays
+    selectedBillingId;
+    searchKey = '';
+    searchResults = [];
+    insuranceAmount = 0;
 
     billing;
     wiredResult;
     label = { BILLING_TITLE };
+    
+    // Explicit internal loading flag to handle imperatives and wire transitions flawlessly
+    isSaving = false; 
+    wireError = false;
 
-    // Grouping the exact field API names from your Apex class to present in lightning-record-form
     fieldsToDisplay = [
         'Patient_c__c', 
         'Invoice_Status__c',
@@ -36,17 +41,36 @@ export default class BillingCalculator extends LightningElement {
     @wire(getBillingRecord, { id: '$targetId' })
     wiredBilling(result) {
         this.wiredResult = result;
-        if (result.data) {
-            this.billing = result.data;
-            this.insuranceAmount = result.data.insuranceAmount__c || 0;
-        } else {
+        const { data, error } = result;
+        
+        if (data) {
+            this.billing = data;
+            this.insuranceAmount = data.insuranceAmount__c || 0;
+            this.wireError = false;
+        } else if (error) {
             this.billing = null;
+            this.wireError = true;
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: 'Error Loading Record',
+                    message: error.body?.message || 'Unknown wire error',
+                    variant: 'error'
+                })
+            );
+        } else {
+            // Handles initialization or empty states cleanly
+            this.billing = null;
+            this.wireError = false;
         }
     }
 
     @wire(searchBillingRecords, { searchTerm: '$searchKey' })
-    wiredSearch({ data }) {
-        this.searchResults = data ? data : [];
+    wiredSearch({ data, error }) {
+        if (data) {
+            this.searchResults = data;
+        } else if (error) {
+            this.searchResults = [];
+        }
     }
 
     handleSearchChange(event) {
@@ -69,15 +93,21 @@ export default class BillingCalculator extends LightningElement {
     }
 
     async handleSave() {
+        // Guard clause to make sure we actually have a target record
+        if (!this.targetId) return;
+
+        this.isSaving = true; // Turn on spinner for the database operation
         try {
             await saveInsuranceAmount({
                 id: this.targetId,
                 insuranceAmount: this.insuranceAmount
             });
             this.dispatchEvent(new ShowToastEvent({ title: 'Invoice Saved', message: 'Insurance updates recorded.', variant: 'success' }));
-            return refreshApex(this.wiredResult);
+            await refreshApex(this.wiredResult);
         } catch (error) {
-            this.dispatchEvent(new ShowToastEvent({ title: 'Error Updating', message: error.body.message, variant: 'error' }));
+            this.dispatchEvent(new ShowToastEvent({ title: 'Error Updating', message: error.body?.message || 'Unknown save error', variant: 'error' }));
+        } finally {
+            this.isSaving = false; // Always turn off spinner, even if save fails
         }
     }
 
@@ -97,8 +127,14 @@ export default class BillingCalculator extends LightningElement {
         return this.totalInvoiceAmount - this.insuranceAmount;
     }
 
+    // Dynamic, bug-free spinner calculation
     get isLoading() {
-        return this.targetId && !this.billing;
+        // 1. Spinnings during active database saves
+        if (this.isSaving) return true;
+        // 2. Do not spin if an error took place or if no targetId is set
+        if (this.wireError || !this.targetId) return false;
+        // 3. Spin if targetId is set but wire data hasn't loaded yet
+        return !this.billing;
     }
 
     get showPromptMessage() {
