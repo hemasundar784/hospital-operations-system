@@ -20,10 +20,19 @@
 
             <!-- The Action Button -->
             <div class="slds-m-top_medium">
-                <lightning-button label="Show Data" onclick={handleClick}></lightning-button>
+                <lightning-button label="get records" onclick={handleClick}></lightning-button>
             </div>
+            <!-- <div class="slds-m-top_medium">
+                <template lwc:if={isCreateClicked}>
+                    <lightning-button variant="brand" label="Close Form" onclick={hideForm}></lightning-button>
+                </template>
+                <template lwc:else>
+                    <lightning-button variant="brand" label="Create Record" onclick={handleCreateClick}></lightning-button>
+                </template>
+            </div> -->
 
-            <!-- Conditional Block -->
+
+            <!-- Conditional getrecord Block -->
         <template lwc:if={isClicked}>
         <div class="slds-box slds-m-top_medium slds-theme_shade">
             <p><strong>Status:</strong> {data}</p>
@@ -61,8 +70,7 @@
                     </div>
                 </div>
             </template>
-        
-    </template>
-</div>
+        </template>
+    </div>
     </lightning-card>
 </template>
