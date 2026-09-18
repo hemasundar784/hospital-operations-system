@@ -1,0 +1,3 @@
+SELECT AccountNumber, BillingAddress, CreatedDate
+  FROM Account
+  WHERE Active__c = 'Yes'
